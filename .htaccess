@@ -1,0 +1,29 @@
+# Conciliacao financeira dpen - configuracao Apache (Hostinger)
+DirectoryIndex index.html
+Options -Indexes
+
+# Forca HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Nao deixa publicar arquivos internos
+<FilesMatch "^(\.|README|.*\.md$|.*\.bak$)">
+  Require all denied
+</FilesMatch>
+<Files "robots.txt">
+  Require all granted
+</Files>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set X-Robots-Tag "noindex, nofollow"
+  # Sempre busca a versao mais nova do site apos cada deploy
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# --- Senha na pasta (opcional): prefira "Pastas protegidas por senha" no hPanel ---

@@ -1,0 +1,12 @@
+# DADOS REAIS NUNCA VAO PARA O REPOSITORIO (regra do projeto)
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+*.tsv
+*.pdf
+*.zip
+*.bak
+.env
+Thumbs.db
+.DS_Store
